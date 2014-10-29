@@ -1,0 +1,325 @@
+!SESSION 2014-10-28 23:56:07.302 -----------------------------------------------
+eclipse.buildId=M20130204-1200
+java.version=1.6.0_65
+java.vendor=Apple Inc.
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -product com.android.ide.eclipse.adt.package.adtproduct -product com.android.ide.eclipse.adt.package.adtproduct -keyring /Users/faeryqueen21/.eclipse_keyring -showlocation
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product com.android.ide.eclipse.adt.package.adtproduct -data /Users/faeryqueen21/Desktop/CPMD -product com.android.ide.eclipse.adt.package.adtproduct -keyring /Users/faeryqueen21/.eclipse_keyring -showlocation
+
+!ENTRY org.eclipse.core.net 1 0 2014-10-28 23:56:13.493
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-10-28 23:57:17.020
+!MESSAGE 
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: Resource '/ParseStarterProject/res' does not exist.
+	at org.eclipse.core.internal.resources.Resource.checkExists(Resource.java:341)
+	at org.eclipse.core.internal.resources.Resource.checkAccessible(Resource.java:215)
+	at org.eclipse.core.internal.resources.Container.members(Container.java:266)
+	at org.eclipse.core.internal.resources.Container.members(Container.java:249)
+	at com.android.ide.eclipse.adt.internal.sdk.Sdk$7.run(Sdk.java:1485)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+!SUBENTRY 1 org.eclipse.core.resources 4 368 2014-10-28 23:57:17.021
+!MESSAGE Resource '/ParseStarterProject/res' does not exist.
+
+!ENTRY org.eclipse.core.resources 4 2 2014-10-28 23:57:17.205
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.core.resources".
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: Resource '/ParseStarterProject/bin' does not exist.
+	at org.eclipse.core.internal.resources.Resource.checkExists(Resource.java:341)
+	at org.eclipse.core.internal.resources.Resource.checkAccessible(Resource.java:215)
+	at org.eclipse.core.internal.resources.Container.members(Container.java:266)
+	at org.eclipse.core.internal.resources.Container.members(Container.java:249)
+	at com.android.ide.eclipse.adt.internal.build.builders.PostCompilerBuilder.clean(PostCompilerBuilder.java:155)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:728)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:199)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:239)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:292)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:295)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:256)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:394)
+	at org.eclipse.core.internal.resources.Project$1.run(Project.java:618)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2344)
+	at org.eclipse.core.internal.resources.Project.internalBuild(Project.java:597)
+	at org.eclipse.core.internal.resources.Project.build(Project.java:114)
+	at com.android.ide.eclipse.adt.internal.project.ProjectHelper.checkAndFixCompilerCompliance(ProjectHelper.java:522)
+	at com.android.ide.eclipse.adt.internal.project.ProjectHelper.fixProjectClasspathEntries(ProjectHelper.java:422)
+	at com.android.ide.eclipse.adt.internal.sdk.Sdk$1$1.run(Sdk.java:1169)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+!SUBENTRY 1 org.eclipse.core.resources 4 368 2014-10-28 23:57:17.205
+!MESSAGE Resource '/ParseStarterProject/bin' does not exist.
+!SUBENTRY 1 org.eclipse.core.resources 4 368 2014-10-28 23:57:17.205
+!MESSAGE Resource '/ParseStarterProject/bin' does not exist.
+
+!ENTRY org.eclipse.wst.common.project.facet.core 4 0 2014-10-28 23:58:45.575
+!MESSAGE Project facet jst.ejb has not been defined. It is used in plugin org.eclipse.jst.j2ee.
+
+!ENTRY org.eclipse.ui 2 2 2014-10-28 23:59:24.291
+!MESSAGE Invalid property category path: ValidationPropertiesPage (bundle: org.eclipse.jst.jsp.ui, propertyPage: org.eclipse.jst.jsp.ui.propertyPage.project.validation)
+
+!ENTRY org.eclipse.ui 2 2 2014-10-28 23:59:24.292
+!MESSAGE Invalid property category path: ValidationPropertiesPage (bundle: org.eclipse.wst.html.ui, propertyPage: org.eclipse.wst.html.ui.propertyPage.project.validation)
+
+!ENTRY org.eclipse.ui 2 2 2014-10-28 23:59:24.292
+!MESSAGE Invalid property category path: ValidationPropertiesPage (bundle: org.eclipse.wst.xml.ui, propertyPage: org.eclipse.wst.xml.ui.propertyPage.project.validation)
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-10-29 00:00:14.123
+!MESSAGE Exception in checkAndLoadTargetData.
+!STACK 0
+java.lang.UnsupportedClassVersionError: Unsupported major.minor version 51.0
+	at java.lang.ClassLoader.defineClass1(Native Method)
+	at java.lang.ClassLoader.defineClassCond(ClassLoader.java:637)
+	at java.lang.ClassLoader.defineClass(ClassLoader.java:621)
+	at java.lang.ClassLoader.defineClass(ClassLoader.java:471)
+	at com.android.ide.eclipse.adt.internal.sdk.AndroidJarLoader.defineAndCacheClass(AndroidJarLoader.java:336)
+	at com.android.ide.eclipse.adt.internal.sdk.AndroidJarLoader.findClass(AndroidJarLoader.java:312)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:306)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:247)
+	at com.android.ide.eclipse.adt.internal.sdk.AndroidTargetParser.collectPermissions(AndroidTargetParser.java:336)
+	at com.android.ide.eclipse.adt.internal.sdk.AndroidTargetParser.run(AndroidTargetParser.java:107)
+	at com.android.ide.eclipse.adt.internal.sdk.Sdk$6.run(Sdk.java:712)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-10-29 00:00:14.124
+!MESSAGE Parsing Data for android-L failed
+!STACK 0
+java.lang.UnsupportedClassVersionError: Unsupported major.minor version 51.0
+	at java.lang.ClassLoader.defineClass1(Native Method)
+	at java.lang.ClassLoader.defineClassCond(ClassLoader.java:637)
+	at java.lang.ClassLoader.defineClass(ClassLoader.java:621)
+	at java.lang.ClassLoader.defineClass(ClassLoader.java:471)
+	at com.android.ide.eclipse.adt.internal.sdk.AndroidJarLoader.defineAndCacheClass(AndroidJarLoader.java:336)
+	at com.android.ide.eclipse.adt.internal.sdk.AndroidJarLoader.findClass(AndroidJarLoader.java:312)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:306)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:247)
+	at com.android.ide.eclipse.adt.internal.sdk.AndroidTargetParser.collectPermissions(AndroidTargetParser.java:336)
+	at com.android.ide.eclipse.adt.internal.sdk.AndroidTargetParser.run(AndroidTargetParser.java:107)
+	at com.android.ide.eclipse.adt.internal.sdk.Sdk$6.run(Sdk.java:712)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+
+!ENTRY org.eclipse.jface 2 0 2014-10-29 00:21:54.440
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2014-10-29 00:21:54.440
+!MESSAGE A conflict occurred for COMMAND+SHIFT+F:
+Binding(COMMAND+SHIFT+F,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.format,Format,
+		Format the selected text,
+		Category(org.eclipse.jdt.ui.category.source,Source,Java Source Actions,true),
+		org.eclipse.ui.internal.MakeHandlersGo@746d2cfa,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.jdt.ui.javaEditorScope,,,system)
+Binding(COMMAND+SHIFT+F,
+	ParameterizedCommand(Command(org.eclipse.wst.sse.ui.format.document,Format,
+		Format selection,
+		Category(org.eclipse.ui.category.edit,Edit,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@32326807,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.wst.sse.ui.structuredTextEditorScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2014-10-29 00:21:54.440
+!MESSAGE A conflict occurred for CTRL+SHIFT+ARROW_DOWN:
+Binding(CTRL+SHIFT+ARROW_DOWN,
+	ParameterizedCommand(Command(org.eclipse.wst.xml.ui.nextSibling,Next Sibling,
+		Go to Next Sibling,
+		Category(org.eclipse.ui.category.edit,Edit,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@5dc6bb75,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.wst.sse.ui.structuredTextEditorScope,,cocoa,system)
+Binding(CTRL+SHIFT+ARROW_DOWN,
+	ParameterizedCommand(Command(org.eclipse.wst.sse.ui.structure.select.last,Restore Last Selection,
+		Restore last selection,
+		Category(org.eclipse.ui.category.edit,Edit,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@20e0e9d5,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.core.runtime.xml,,cocoa,system)
+Binding(CTRL+SHIFT+ARROW_DOWN,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.select.last,Restore Last Selection,
+		Restore last selection,
+		Category(org.eclipse.ui.category.edit,Edit,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@2ba40ccd,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.jdt.ui.javaEditorScope,,cocoa,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2014-10-29 00:21:54.440
+!MESSAGE A conflict occurred for COMMAND+SHIFT+\:
+Binding(COMMAND+SHIFT+\,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.remove.block.comment,Remove Block Comment,
+		Remove the block comment enclosing the selection,
+		Category(org.eclipse.jdt.ui.category.source,Source,Java Source Actions,true),
+		org.eclipse.ui.internal.MakeHandlersGo@1f447d1d,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.jdt.ui.javaEditorScope,,,system)
+Binding(COMMAND+SHIFT+\,
+	ParameterizedCommand(Command(org.eclipse.wst.sse.ui.remove.block.comment,Remove Block Comment,
+		Remove Block Comment,
+		Category(org.eclipse.ui.category.edit,Edit,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@410e4a33,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.wst.sse.ui.structuredTextEditorScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2014-10-29 00:21:54.440
+!MESSAGE A conflict occurred for CTRL+SHIFT+ARROW_RIGHT:
+Binding(CTRL+SHIFT+ARROW_RIGHT,
+	ParameterizedCommand(Command(org.eclipse.wst.sse.ui.structure.select.next,Select Next Element,
+		Expand selection to include next sibling,
+		Category(org.eclipse.ui.category.edit,Edit,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@5f2cf6d3,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.wst.sse.ui.structuredTextEditorScope,,cocoa,system)
+Binding(CTRL+SHIFT+ARROW_RIGHT,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.select.next,Select Next Element,
+		Expand selection to include next sibling,
+		Category(org.eclipse.ui.category.edit,Edit,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@49720af4,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.jdt.ui.javaEditorScope,,cocoa,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2014-10-29 00:21:54.440
+!MESSAGE A conflict occurred for COMMAND+/:
+Binding(COMMAND+/,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.toggle.comment,Toggle Comment,
+		Toggle comment the selected lines,
+		Category(org.eclipse.jdt.ui.category.source,Source,Java Source Actions,true),
+		org.eclipse.ui.internal.MakeHandlersGo@5e2d3ed7,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.jdt.ui.javaEditorScope,,,system)
+Binding(COMMAND+/,
+	ParameterizedCommand(Command(org.eclipse.wst.sse.ui.add.block.comment,Add Block Comment,
+		Add Block Comment,
+		Category(org.eclipse.ui.category.edit,Edit,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@5b891842,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.wst.sse.ui.structuredTextEditorScope,,cocoa,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2014-10-29 00:21:54.440
+!MESSAGE A conflict occurred for COMMAND+SHIFT+P:
+Binding(COMMAND+SHIFT+P,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.goto.matching.bracket,Go to Matching Bracket,
+		Moves the cursor to the matching bracket,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@6c78c58e,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.jdt.ui.javaEditorScope,,,system)
+Binding(COMMAND+SHIFT+P,
+	ParameterizedCommand(Command(org.eclipse.wst.sse.ui.goto.matching.bracket,Matching Character,
+		Go to Matching Character,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@52437b9a,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.wst.sse.ui.structuredTextEditorScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2014-10-29 00:21:54.440
+!MESSAGE A conflict occurred for COMMAND+I:
+Binding(COMMAND+I,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.indent,Correct Indentation,
+		Corrects the indentation of the selected lines,
+		Category(org.eclipse.jdt.ui.category.source,Source,Java Source Actions,true),
+		org.eclipse.ui.internal.MakeHandlersGo@6cf22544,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.jdt.ui.javaEditorScope,,,system)
+Binding(COMMAND+I,
+	ParameterizedCommand(Command(org.eclipse.wst.sse.ui.format.active.elements,Format Active Elements,
+		Format active elements,
+		Category(org.eclipse.ui.category.edit,Edit,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@1e0225f0,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.wst.sse.ui.structuredTextEditorScope,,,system)
+Binding(COMMAND+I,
+	ParameterizedCommand(Command(org.eclipse.ui.file.properties,Properties,
+		Display the properties of the selected item,
+		Category(org.eclipse.ui.category.file,File,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@3fa768de,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,cocoa,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2014-10-29 00:21:54.440
+!MESSAGE A conflict occurred for COMMAND+O:
+Binding(COMMAND+O,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.show.outline,Quick Outline,
+		Show the quick outline for the editor input,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@d6ccb3d,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.jdt.ui.javaEditorScope,,,system)
+Binding(COMMAND+O,
+	ParameterizedCommand(Command(org.eclipse.wst.sse.ui.quick_outline,Quick Outline,
+		Show the quick outline for the editor input,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@619318ad,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.wst.sse.ui.structuredTextEditorScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2014-10-29 00:21:54.440
+!MESSAGE A conflict occurred for COMMAND+SHIFT+C:
+Binding(COMMAND+SHIFT+C,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.toggle.comment,Toggle Comment,
+		Toggle comment the selected lines,
+		Category(org.eclipse.jdt.ui.category.source,Source,Java Source Actions,true),
+		org.eclipse.ui.internal.MakeHandlersGo@5e2d3ed7,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.jdt.ui.javaEditorScope,,,system)
+Binding(COMMAND+SHIFT+C,
+	ParameterizedCommand(Command(org.eclipse.wst.sse.ui.toggle.comment,Toggle Comment,
+		Toggle Comment,
+		Category(org.eclipse.ui.category.edit,Edit,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@405e70bc,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.wst.sse.ui.structuredTextEditorScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2014-10-29 00:21:54.440
+!MESSAGE A conflict occurred for CTRL+SHIFT+ARROW_UP:
+Binding(CTRL+SHIFT+ARROW_UP,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.select.enclosing,Select Enclosing Element,
+		Expand selection to include enclosing element,
+		Category(org.eclipse.ui.category.edit,Edit,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@3937e7,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.jdt.ui.javaEditorScope,,cocoa,system)
+Binding(CTRL+SHIFT+ARROW_UP,
+	ParameterizedCommand(Command(org.eclipse.wst.sse.ui.structure.select.enclosing,Select Enclosing Element,
+		Expand selection to include enclosing element,
+		Category(org.eclipse.ui.category.edit,Edit,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@9536ecf,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.core.runtime.xml,,cocoa,system)
+Binding(CTRL+SHIFT+ARROW_UP,
+	ParameterizedCommand(Command(org.eclipse.wst.xml.ui.previousSibling,Previous Sibling,
+		Go to Previous Sibling,
+		Category(org.eclipse.ui.category.edit,Edit,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@45176de6,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.wst.sse.ui.structuredTextEditorScope,,cocoa,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2014-10-29 00:21:54.440
+!MESSAGE A conflict occurred for CTRL+SHIFT+ARROW_LEFT:
+Binding(CTRL+SHIFT+ARROW_LEFT,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.select.previous,Select Previous Element,
+		Expand selection to include previous sibling,
+		Category(org.eclipse.ui.category.edit,Edit,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@2c851ece,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.jdt.ui.javaEditorScope,,cocoa,system)
+Binding(CTRL+SHIFT+ARROW_LEFT,
+	ParameterizedCommand(Command(org.eclipse.wst.sse.ui.structure.select.previous,Select Previous Element,
+		Expand selection to include previous sibling,
+		Category(org.eclipse.ui.category.edit,Edit,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@70a5d40f,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.wst.sse.ui.structuredTextEditorScope,,cocoa,system)
