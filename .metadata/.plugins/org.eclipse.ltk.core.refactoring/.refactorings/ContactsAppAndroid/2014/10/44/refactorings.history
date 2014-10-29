@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;ContactsAppAndroid/res/layout/signup_fragment_layout.xml&apos; to &apos;fragment_signup.xml&apos;" description="Rename resource &apos;signup_fragment_layout.xml&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="res/layout/signup_fragment_layout.xml" name="fragment_signup.xml" stamp="1414570089907" updateReferences="true"/>
+</session>

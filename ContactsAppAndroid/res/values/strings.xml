@@ -7,4 +7,6 @@
     <string name="skip">Skip</string>
     <string name="username">username</string>
     <string name="password">password</string>
+    <string name="newUsername">Create Username</string>
+    <string name="newPassword">Create Password</string>
 </resources>

@@ -1,6 +1,9 @@
 package com.parse.starter;
 
 import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,6 +13,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.parse.ParseAnalytics;
+
+import fragments.SignUpFragment;
 
 public class ParseStarterProjectActivity extends Activity {
 	
@@ -31,6 +36,8 @@ public class ParseStarterProjectActivity extends Activity {
 		loginButton = (Button) findViewById(R.id.loginButton);
 		signupButton = (Button) findViewById(R.id.signupButton);
 		skipView = (TextView) findViewById(R.id.skipLink);
+		
+		
 
 		ParseAnalytics.trackAppOpened(getIntent());
 		
@@ -52,7 +59,20 @@ public class ParseStarterProjectActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				//FragmentManager manager = getFragmentManager();
+				//SignUpFragment fragment = (SignUpFragment) manager.findFragmentById(R.id.signup_fragment);
+				//manager.beginTransaction().attach(fragment).commit();
 				
+				Fragment newFragment = new SignUpFragment();
+				FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+				// Replace whatever is in the fragment_container view with this fragment,
+				// and add the transaction to the back stack
+				transaction.replace(R.id.signup_fragment, newFragment);
+				transaction.addToBackStack(null);
+
+				// Commit the transaction
+				transaction.commit();
 			}
 			
 		});
