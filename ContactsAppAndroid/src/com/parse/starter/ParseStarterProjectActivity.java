@@ -22,7 +22,6 @@ public class ParseStarterProjectActivity extends Activity {
 	Button signupButton;
 	String usernameEntered = "";
 	String passwordEntered = "";
-	TextView skipView;
 	String TAG = "Main Activity";
 	
 	public void onCreate(Bundle savedInstanceState) {
@@ -33,24 +32,9 @@ public class ParseStarterProjectActivity extends Activity {
 		password = (EditText) findViewById(R.id.passwordText);
 		loginButton = (Button) findViewById(R.id.loginButton);
 		signupButton = (Button) findViewById(R.id.signupButton);
-		skipView = (TextView) findViewById(R.id.skipLink);
-		
-		 
 
 		ParseAnalytics.trackAppOpened(getIntent());
 
-		/*
-		FragmentManager fragmentManager = getFragmentManager();
-		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-		LoginFragment loginFragment = new LoginFragment();
-		SignUpFragment signupFragment = new SignUpFragment();
-		fragmentTransaction.remove(signupFragment);
-		fragmentTransaction.add(R.id.login_fragment, loginFragment);
-		fragmentTransaction.commit();*/
-		
-		
-		
 		loginButton.setOnClickListener(new OnClickListener(){ 
 
 			@Override
@@ -73,40 +57,11 @@ public class ParseStarterProjectActivity extends Activity {
 			public void onClick(View v) {
 				
 				Intent detailActivity = new Intent(getBaseContext(), SignUpActivity.class);
-				//Bundle bundle = new Bundle();
-				//bundle.putSerializable("details", item);
-				//detailActivity.putExtras(bundle);
-				//startActivityForResult(detailActivity, 0);
 				startActivity(detailActivity);
-				// TODO Auto-generated method stub
-				//FragmentManager manager = getFragmentManager();
-				//SignUpFragment fragment = (SignUpFragment) manager.findFragmentById(R.id.signup_fragment);
-				//manager.beginTransaction().attach(fragment).commit();
-				/*
-				Fragment newFragment = new SignUpFragment();
-				FragmentTransaction transaction = getFragmentManager().beginTransaction();
-
-				// Replace whatever is in the fragment_container view with this fragment,
-				// and add the transaction to the back stack
-				transaction.replace(R.id.signup_fragment, newFragment);
-				transaction.addToBackStack(null);
-
-				// Commit the transaction
-				transaction.commit();*/
+	
 			}
 			
 		});
 		
-		skipView.setOnClickListener(new OnClickListener(){
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Log.i(TAG, "Clicked Skip");
-				Intent intent = new Intent(getBaseContext(), ContactsActivity.class);
-				startActivity(intent);
-			}
-			
-		});
 	}
 }

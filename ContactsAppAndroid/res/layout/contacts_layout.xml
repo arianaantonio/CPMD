@@ -12,6 +12,8 @@
         android:layout_height="200dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:focusable="true"
+        android:clickable="true"
         android:layout_marginTop="22dp" >
     </ListView>
 
@@ -24,14 +26,6 @@
         android:layout_alignParentLeft="true"
         android:text="@string/delete" />
 
-    <Button
-        android:id="@+id/signoutButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/addButton"
-        android:text="@string/signOut" />
-
     <EditText
         android:id="@+id/editText1"
         android:layout_width="wrap_content"
@@ -39,9 +33,10 @@
         android:layout_below="@+id/listView1"
         android:layout_centerHorizontal="true"
         android:ems="10"
+        android:hint="@string/date"
         android:inputType="date" >
 
-        <requestFocus />
+        
     </EditText>
 
     <EditText
@@ -63,5 +58,13 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="36dp"
         android:text="@string/add" />
+
+    <Button
+        android:id="@+id/signoutButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="@string/signOut" />
 
 </RelativeLayout>

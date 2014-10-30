@@ -36,7 +36,7 @@ public class SignUpActivity extends Activity {
 				passwordCreated = password.getText().toString();
 				
 				Intent intent = new Intent(getBaseContext(), ContactsActivity.class);
-				startActivity(intent);
+				startActivity(intent); 
 				
 			}
 			
