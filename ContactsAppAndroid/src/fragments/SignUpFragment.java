@@ -4,6 +4,7 @@ package fragments;
 
 import com.parse.starter.R;
 
+//import android.R;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,7 +19,8 @@ public class SignUpFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		View view = inflater.inflate(R.layout.signup_layout, container, false);
+		
+		View view = inflater.inflate(R.layout.fragment_signup, container, false);
 		return view;
 		//return super.onCreateView(inflater, container, savedInstanceState);
 	}
