@@ -8,11 +8,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
-import com.parse.LogInCallback;
 import com.parse.ParseAnalytics;
-import com.parse.ParseException;
-import com.parse.ParseUser;
 
 public class ParseStarterProjectActivity extends Activity {
 	
@@ -36,15 +34,6 @@ public class ParseStarterProjectActivity extends Activity {
 		signupButton = (Button) findViewById(R.id.signupButton);
 
 		ParseAnalytics.trackAppOpened(getIntent());
-		//ParseUser.logOut();  
-		ParseUser currentUser = ParseUser.getCurrentUser();
-		if (currentUser != null) { 
-		  // do stuff with the user
-			Intent intent = new Intent(getBaseContext(), ContactsActivity.class);
-			startActivity(intent); 
-		} else {
-		  // show the signup or login screen
-		}
 
 		loginButton.setOnClickListener(new OnClickListener(){ 
 
@@ -55,16 +44,8 @@ public class ParseStarterProjectActivity extends Activity {
 				passwordEntered = password.getText().toString();
 				Log.i(TAG, "Username: " +usernameEntered+ " Password: " +passwordEntered);
 				
-				ParseUser.logInInBackground(usernameEntered, passwordEntered, new LogInCallback() {
-					  public void done(ParseUser user, ParseException e) {
-					    if (user != null) {
-					    	Intent intent = new Intent(getBaseContext(), ContactsActivity.class);
-							startActivity(intent);
-					    } else {
-					      Log.e("Login", "ERROR: " +e.getCode());
-					    }
-					  }
-					});
+				Intent intent = new Intent(getBaseContext(), ContactsActivity.class);
+				startActivity(intent);
 				
 			}
 			

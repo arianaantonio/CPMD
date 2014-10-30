@@ -38,7 +38,7 @@ public class ParseStarterProjectActivity extends Activity {
 		ParseAnalytics.trackAppOpened(getIntent());
 		//ParseUser.logOut();  
 		ParseUser currentUser = ParseUser.getCurrentUser();
-		if (currentUser != null) { 
+		if (currentUser != null) {
 		  // do stuff with the user
 			Intent intent = new Intent(getBaseContext(), ContactsActivity.class);
 			startActivity(intent); 

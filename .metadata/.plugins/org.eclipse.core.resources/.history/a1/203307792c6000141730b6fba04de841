@@ -36,15 +36,6 @@ public class ParseStarterProjectActivity extends Activity {
 		signupButton = (Button) findViewById(R.id.signupButton);
 
 		ParseAnalytics.trackAppOpened(getIntent());
-		//ParseUser.logOut();  
-		ParseUser currentUser = ParseUser.getCurrentUser();
-		if (currentUser != null) { 
-		  // do stuff with the user
-			Intent intent = new Intent(getBaseContext(), ContactsActivity.class);
-			startActivity(intent); 
-		} else {
-		  // show the signup or login screen
-		}
 
 		loginButton.setOnClickListener(new OnClickListener(){ 
 
