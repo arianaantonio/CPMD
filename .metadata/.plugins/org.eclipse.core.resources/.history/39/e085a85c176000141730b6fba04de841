@@ -1,0 +1,111 @@
+package com.parse.starter;
+
+import java.util.List;
+
+import android.app.Activity;
+import android.net.ParseException;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.parse.FindCallback;
+import com.parse.GetCallback;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+
+public class ContactsActivity extends Activity {
+	
+	String contactName;
+	String contactPhone;
+	EditText contactNameText;
+	EditText contactPhoneText;
+	Button addContact;
+	Button deletedContact;
+	Button signOut;
+	String TAG = "Contacts Activity";
+	ParseObject contactObject = new ParseObject("Contacts");
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.contacts_layout);
+		
+		ParseQuery<ParseObject> query2 = ParseQuery.getQuery("Contacts");
+		query2.getInBackground("gI61lUeUKW", new GetCallback<ParseObject>() {
+		  public void done(ParseObject object, ParseException e) {
+		    if (e == null) {
+		      // object will be your game score
+		    	Log.d("score1", "Retrieved " + object + " scores");
+		    } else { 
+		      // something went wrong
+		    	Log.d("score2", "Retrieved " + object + " scores");
+		    }
+		  }
+
+		@Override
+		public void done(ParseObject object, com.parse.ParseException e) {
+			// TODO Auto-generated method stub
+			Log.d("score3", "Retrieved " + object + " scores");
+		}
+		});
+		
+		ParseQuery<ParseObject> query = ParseQuery.getQuery("Contacts");
+		//query.whereEqualTo("name", "John Smith");
+		query.findInBackground(new FindCallback<ParseObject>() {
+		    public void done(List<ParseObject> scoreList, ParseException e) {
+		        if (e == null) {
+		            Log.d("score", "Retrieved " + scoreList.size() + " scores");
+		        } else {
+		            Log.d("score", "Error: " + e.getMessage());
+		        }
+		    }
+
+			@Override
+			public void done(List<ParseObject> objects,
+					com.parse.ParseException e) {
+				// TODO Auto-generated method stub 
+				
+				String name = contactObject.getString("name");
+				int number = contactObject.getInt("phoneNumber");
+				Log.d("score", "retrieved: " +name+ " " +number);
+				
+			}
+		});
+		
+		contactNameText = (EditText) findViewById(R.id.contactName);
+		contactPhoneText = (EditText) findViewById(R.id.contactphonenumber);
+		addContact = (Button) findViewById(R.id.addButton);
+		deletedContact = (Button) findViewById(R.id.deleteButton);
+		signOut = (Button) findViewById(R.id.signoutButton);
+		addContact.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				contactName = contactNameText.getText().toString();
+				contactPhone = contactPhoneText.getText().toString();
+				if (contactPhone.length() != 10 || contactName.isEmpty()) {
+					Toast.makeText(getApplicationContext(), "Please enter a name and a valid phone number",
+							   Toast.LENGTH_LONG).show(); 
+				} else {
+					
+					contactObject.put("name", contactName);
+					contactObject.put("phoneNumber", contactPhone);
+					contactObject.saveInBackground();
+				}
+				Log.i(TAG, "Name: " +contactName+ " Phone: " +contactPhone); 
+				
+			}
+			
+		});
+		
+		
+	}
+	
+
+}

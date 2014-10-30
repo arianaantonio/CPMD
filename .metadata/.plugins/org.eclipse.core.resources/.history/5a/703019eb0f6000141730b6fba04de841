@@ -1,0 +1,49 @@
+package com.parse.starter;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+
+public class ContactsActivity extends Activity {
+	
+	String contactName;
+	String contactPhone;
+	EditText contactNameText;
+	EditText contactPhoneText;
+	Button addContact;
+	Button deletedContact;
+	Button signOut;
+	String TAG = "Contacts Activity";
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.contacts_layout);
+		
+		contactNameText = (EditText) findViewById(R.id.contactName);
+		contactPhoneText = (EditText) findViewById(R.id.contactphonenumber);
+		addContact = (Button) findViewById(R.id.addButton);
+		deletedContact = (Button) findViewById(R.id.deleteButton);
+		signOut = (Button) findViewById(R.id.signoutButton);
+		addContact.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				contactName = contactNameText.getText().toString();
+				contactPhone = contactPhoneText.getText().toString();
+				Log.i(TAG, "Name: " +contactName+ " Phone: " +contactPhone);
+				
+			}
+			
+		});
+		
+		
+	}
+	
+
+}
