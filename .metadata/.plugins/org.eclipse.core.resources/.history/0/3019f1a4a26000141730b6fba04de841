@@ -8,8 +8,6 @@
 
     <ListView
         android:id="@+id/listView1"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_alignParentTop="true"
@@ -26,8 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:text="@string/delete"
-        android:textSize="14sp" />
+        android:text="@string/delete" />
 
     <EditText
         android:id="@+id/editText1"
@@ -42,6 +39,17 @@
         
     </EditText>
 
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/addButton"
+        android:layout_alignRight="@+id/editText1"
+        android:layout_marginBottom="14dp"
+        android:ems="10"
+        android:hint="@string/distance"
+        android:inputType="numberDecimal" />
+
     <Button
         android:id="@+id/addButton"
         android:layout_width="wrap_content"
@@ -49,8 +57,7 @@
         android:layout_above="@+id/deleteButton"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="36dp"
-        android:text="@string/add"
-        android:textSize="14sp" />
+        android:text="@string/add" />
 
     <Button
         android:id="@+id/signoutButton"
@@ -58,8 +65,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:text="@string/signOut"
-        android:textSize="14sp" />
+        android:text="@string/signOut" />
 
     <TextView
         android:id="@+id/usernameField"
@@ -70,21 +76,6 @@
         android:layout_alignLeft="@+id/addButton"
         android:layout_alignRight="@+id/addButton"
         android:gravity="center"
-        android:text=""
-        android:textSize="12sp" />
-
-    <EditText
-        android:id="@+id/editText2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText1"
-        android:layout_below="@+id/editText1"
-        android:layout_marginTop="15dp"
-        android:ems="10"
-        android:hint="@string/distance"
-        android:inputType="numberDecimal" >
-
-        <requestFocus />
-    </EditText>
+        android:text="" />
 
 </RelativeLayout>

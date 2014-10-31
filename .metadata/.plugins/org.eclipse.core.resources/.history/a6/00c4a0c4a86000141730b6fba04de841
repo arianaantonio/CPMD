@@ -189,7 +189,7 @@ public class ContactsActivity extends Activity {
 					myData.add(displayText);
 					adapter.notifyDataSetChanged();
 					dateText.setText("");
-					distanceText.setText("");    
+					distanceText.setText("");   
 					
 				}
 				//Log.i(TAG, "Name: " +contactName+ " Phone: " +contactPhone); 

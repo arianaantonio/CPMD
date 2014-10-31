@@ -122,7 +122,6 @@ public class ContactsActivity extends Activity {
 					}
 					});
 				ParseQuery<ParseObject> query2 = ParseQuery.getQuery("Runs");
-				query2.whereEqualTo("userID", currentUser);
 				query2.findInBackground(new FindCallback<ParseObject>() { 
 
 					@Override
@@ -184,12 +183,12 @@ public class ContactsActivity extends Activity {
 					runObject.saveInBackground();
 					
 					HashMap<String, Object> displayText = new HashMap<String, Object>();
-					displayText.put("date", date);   
+					displayText.put("date", date);
 					displayText.put("distance", distanceNum);
 					myData.add(displayText);
 					adapter.notifyDataSetChanged();
 					dateText.setText("");
-					distanceText.setText("");    
+					distanceText.setText("");
 					
 				}
 				//Log.i(TAG, "Name: " +contactName+ " Phone: " +contactPhone); 
