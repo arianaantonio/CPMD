@@ -38,12 +38,13 @@
                 distancePulled = [object objectForKey:@"distance"];
                 datePulled = [object objectForKey:@"date"];
                 NSLog(@"Distance: %@ , Date: %@", distancePulled, datePulled);
+                NSMutableDictionary *runDictionary2 = [[NSMutableDictionary alloc]init];
                 
-                [runDictionary setValue:distancePulled forKey:@"distance"];
-                [runDictionary setValue:datePulled forKey:@"date"];
-                [runDictionary setValue:object.objectId forKey:@"objectID"];
+                [runDictionary2 setValue:distancePulled forKey:@"distance"];
+                [runDictionary2 setValue:datePulled forKey:@"date"];
+                [runDictionary2 setValue:object.objectId forKey:@"objectId"];
                 
-                [runArray addObject:runDictionary];
+                [runArray addObject:runDictionary2];
                 
             }
             [_runTable reloadData];
@@ -75,6 +76,51 @@
 }
 -(void)deleteRun:(id)sender {
     
+    
+    NSIndexPath *selectedIndexPath = [_runTable indexPathForSelectedRow];
+    if ([runArray count] != 0) {
+        NSMutableDictionary *runDic = [runArray objectAtIndex:selectedIndexPath.row];
+        NSString *objectID = runDic[@"objectId"];
+        NSLog(@"Object ID: %@", objectID);
+        
+        PFQuery *query = [PFQuery queryWithClassName:@"Runs"];
+        [query whereKey:@"objectId" equalTo:objectID];
+        runDictionary = [[NSMutableDictionary alloc]init];
+        
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            if (!error) {
+                
+                NSLog(@"Successfully retrieved %lu scores.", (unsigned long)objects.count);
+                NSString *distancePulled = @"";
+                NSString *datePulled = @"";
+                
+                for (PFObject *object in objects) {
+                    NSLog(@"%@", object.objectId);
+                    
+                    [object deleteInBackground];
+                    /*
+                    distancePulled = [object objectForKey:@"distance"];
+                    datePulled = [object objectForKey:@"date"];
+                    NSLog(@"Distance: %@ , Date: %@", distancePulled, datePulled);
+                    NSMutableDictionary *runDictionary2 = [[NSMutableDictionary alloc]init];
+                    
+                    [runDictionary2 setValue:distancePulled forKey:@"distance"];
+                    [runDictionary2 setValue:datePulled forKey:@"date"];
+                    [runDictionary2 setValue:object.objectId forKey:@"objectID"];
+                    
+                    [runArray addObject:runDictionary2];*/
+                    
+                }
+            } else {
+                // Log details of the failure
+                NSLog(@"Error: %@ %@", error, [error userInfo]);
+            }
+        }];
+        [runArray removeObjectAtIndex:selectedIndexPath.row];
+        [_runTable reloadData];
+    }
+    
+
 }
 -(void)signOut:(id)sender {
     
@@ -88,15 +134,17 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"runCell"];
-    for (int i = 0; i <[runArray count]; i++) {
+    //for (int i = 0; i <[runArray count]; i++) {
         
-   
-        runDictionary = [runArray objectAtIndex:i];
+    if (cell != nil) {
+        runDictionary = [runArray objectAtIndex:indexPath.row];
         cell.textLabel.text = [runDictionary objectForKey:@"date"];
         cell.detailTextLabel.text = [runDictionary objectForKey:@"distance"];
+        return cell;
     }
+   // }
     
-    return cell;
+    return nil;
 }
 -(BOOL) textFieldShouldReturn:(UITextField *)textField{
     
