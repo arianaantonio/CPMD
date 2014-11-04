@@ -28,9 +28,14 @@
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error) {
             // Hooray! Let them use the app now.
+            [self performSegueWithIdentifier:@"signUpToAddRunSegue" sender:self];
         } else {
             NSString *errorString = [error userInfo][@"error"];
             NSLog(@"Error: %@", errorString);
+            if ([error code] == 202) {
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Error" message:@"Username already in use" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                [alert show];
+            }
             // Show the errorString somewhere and let the user try again.
         }
     }];

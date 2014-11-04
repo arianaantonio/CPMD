@@ -32,6 +32,7 @@
                                         if (user) {
                                             // Do stuff after successful login.
                                             NSLog(@"Logged in");
+                                            [self performSegueWithIdentifier:@"loginSegue" sender:self];
                                         } else {
                                             // The login failed. Check error to see why.
                                             NSLog(@"Not logged in");

@@ -21,6 +21,15 @@
     [Parse setApplicationId:@"62wjhOP0GD1YjJnqUuR0GKrsth6v1yZCAfa431Go"
                   clientKey:@"kbCshWR7uvPDBn9ZNsyGHOBTH7twC46GVO88S5yD"];
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    
+    PFUser *currentUser = [PFUser currentUser];
+    if (currentUser) {
+        // do stuff with the user
+        self.window.rootViewController = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"addRunViewController"];
+    } else {
+        // show the signup or login screen
+        self.window.rootViewController = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
+    }
     return YES;
 }
 

@@ -9,7 +9,7 @@
         <!--View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="loginViewController" id="vXZ-lx-hvc" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -25,53 +25,54 @@
                                 </state>
                                 <connections>
                                     <action selector="login:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Jai-Le-bGD"/>
-                                    <segue destination="j8P-bh-Fni" kind="presentation" id="ikt-Kn-Wjr"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jvg-U7-8Qf">
-                                <rect key="frame" x="252" y="117" width="97" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="97" id="yZW-lv-MhE"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="obe-O9-Jcw">
-                                <rect key="frame" x="252" y="192" width="97" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g49-Rb-U54">
                                 <rect key="frame" x="268" y="499" width="64" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="64" id="C3r-YK-aeo"/>
+                                    <constraint firstAttribute="width" constant="64" id="3SB-3i-aJP"/>
                                 </constraints>
                                 <state key="normal" title="Sign Up">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="signUp:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="IZS-bX-NoU"/>
-                                    <segue destination="WQT-E9-gUs" kind="presentation" id="MOM-25-5Kt"/>
+                                    <segue destination="WQT-E9-gUs" kind="presentation" id="kSW-dF-Fyl"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="obe-O9-Jcw">
+                                <rect key="frame" x="227" y="192" width="146" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="username" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="jvg-U7-8Qf">
+                                <rect key="frame" x="227" y="116" width="146" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="146" id="Bxm-HQ-2DX"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="N4w-ow-6Rn" firstAttribute="leading" secondItem="g49-Rb-U54" secondAttribute="leading" id="3PX-VQ-FM3"/>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="g49-Rb-U54" secondAttribute="bottom" constant="71" id="Bya-34-KgX"/>
-                            <constraint firstItem="N4w-ow-6Rn" firstAttribute="top" secondItem="obe-O9-Jcw" secondAttribute="bottom" constant="46" id="Ftt-ss-mbw"/>
-                            <constraint firstItem="jvg-U7-8Qf" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="97" id="IQG-Ss-sQA"/>
-                            <constraint firstItem="obe-O9-Jcw" firstAttribute="centerX" secondItem="N4w-ow-6Rn" secondAttribute="centerX" id="JQZ-YA-fOt"/>
-                            <constraint firstItem="N4w-ow-6Rn" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="KTn-ND-2bh"/>
-                            <constraint firstItem="obe-O9-Jcw" firstAttribute="top" secondItem="jvg-U7-8Qf" secondAttribute="bottom" constant="45" id="ZTe-ej-nbD"/>
-                            <constraint firstItem="obe-O9-Jcw" firstAttribute="trailing" secondItem="jvg-U7-8Qf" secondAttribute="trailing" id="qRF-B5-Ryh"/>
-                            <constraint firstItem="obe-O9-Jcw" firstAttribute="leading" secondItem="jvg-U7-8Qf" secondAttribute="leading" id="qw6-US-vIY"/>
-                            <constraint firstItem="N4w-ow-6Rn" firstAttribute="centerX" secondItem="g49-Rb-U54" secondAttribute="centerX" id="xTo-XX-Xez"/>
+                            <constraint firstItem="obe-O9-Jcw" firstAttribute="top" secondItem="jvg-U7-8Qf" secondAttribute="bottom" constant="46" id="3lU-Ac-rca"/>
+                            <constraint firstItem="N4w-ow-6Rn" firstAttribute="leading" secondItem="g49-Rb-U54" secondAttribute="leading" id="ARb-GZ-ZdL"/>
+                            <constraint firstItem="jvg-U7-8Qf" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="96" id="Aai-iI-r4x"/>
+                            <constraint firstItem="jvg-U7-8Qf" firstAttribute="trailing" secondItem="obe-O9-Jcw" secondAttribute="trailing" id="CMe-aY-XGo"/>
+                            <constraint firstItem="N4w-ow-6Rn" firstAttribute="centerX" secondItem="g49-Rb-U54" secondAttribute="centerX" id="GNH-Y2-BPx"/>
+                            <constraint firstItem="obe-O9-Jcw" firstAttribute="leading" secondItem="jvg-U7-8Qf" secondAttribute="leading" id="GbJ-iV-yB5"/>
+                            <constraint firstItem="N4w-ow-6Rn" firstAttribute="centerX" secondItem="obe-O9-Jcw" secondAttribute="centerX" id="KfP-0H-TgI"/>
+                            <constraint firstItem="jvg-U7-8Qf" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="OLl-9R-7FY"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="g49-Rb-U54" secondAttribute="bottom" constant="71" id="eNb-pB-LBC"/>
+                            <constraint firstItem="N4w-ow-6Rn" firstAttribute="top" secondItem="obe-O9-Jcw" secondAttribute="bottom" constant="46" id="sMi-R5-zc3"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="passwordField" destination="obe-O9-Jcw" id="5ZJ-TH-RmJ"/>
                         <outlet property="usernameField" destination="jvg-U7-8Qf" id="59a-sl-MlY"/>
+                        <segue destination="WQT-E9-gUs" kind="presentation" identifier="loginToSignUpSegue" id="re7-47-6Cs"/>
+                        <segue destination="j8P-bh-Fni" kind="presentation" identifier="loginSegue" id="nO4-ZI-xOO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -89,18 +90,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gqk-fq-uEN">
-                                <rect key="frame" x="252" y="168" width="97" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="97" id="kbN-T6-sQw"/>
-                                </constraints>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="BBc-V7-Sq6">
+                                <rect key="frame" x="228" y="266" width="144" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BBc-V7-Sq6">
-                                <rect key="frame" x="252" y="267" width="97" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="niH-rV-wnr">
                                 <rect key="frame" x="273" y="388" width="55" height="30"/>
@@ -109,34 +102,42 @@
                                 </state>
                                 <connections>
                                     <action selector="signUp:" destination="WQT-E9-gUs" eventType="touchUpInside" id="n1N-yT-u80"/>
-                                    <segue destination="j8P-bh-Fni" kind="presentation" id="Svf-dB-haG"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="username" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="gqk-fq-uEN">
+                                <rect key="frame" x="228" y="169" width="144" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="144" id="yhU-Sm-CCL"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="gqk-fq-uEN" firstAttribute="leading" secondItem="BBc-V7-Sq6" secondAttribute="leading" id="8Yp-Gz-41w"/>
-                            <constraint firstItem="niH-rV-wnr" firstAttribute="top" secondItem="BBc-V7-Sq6" secondAttribute="bottom" constant="91" id="EHM-aM-pdN"/>
-                            <constraint firstItem="BBc-V7-Sq6" firstAttribute="trailing" secondItem="gqk-fq-uEN" secondAttribute="trailing" id="FsS-YB-rbw"/>
-                            <constraint firstItem="BBc-V7-Sq6" firstAttribute="top" secondItem="gqk-fq-uEN" secondAttribute="bottom" constant="69" id="Jr3-XW-ueb"/>
-                            <constraint firstItem="BBc-V7-Sq6" firstAttribute="centerX" secondItem="niH-rV-wnr" secondAttribute="centerX" id="lXC-fq-g2r"/>
-                            <constraint firstItem="gqk-fq-uEN" firstAttribute="centerX" secondItem="KAj-tI-KvV" secondAttribute="centerX" id="xog-jd-hq4"/>
-                            <constraint firstItem="gqk-fq-uEN" firstAttribute="top" secondItem="Wde-vE-2Tw" secondAttribute="bottom" constant="148" id="ygh-UT-cRN"/>
+                            <constraint firstItem="niH-rV-wnr" firstAttribute="top" secondItem="BBc-V7-Sq6" secondAttribute="bottom" constant="92" id="7Cz-cB-SNM"/>
+                            <constraint firstItem="BBc-V7-Sq6" firstAttribute="top" secondItem="gqk-fq-uEN" secondAttribute="bottom" constant="67" id="ZT1-Lj-Q5Y"/>
+                            <constraint firstItem="niH-rV-wnr" firstAttribute="centerX" secondItem="BBc-V7-Sq6" secondAttribute="centerX" id="baR-l6-LdZ"/>
+                            <constraint firstItem="BBc-V7-Sq6" firstAttribute="trailing" secondItem="gqk-fq-uEN" secondAttribute="trailing" id="nzp-RP-ihq"/>
+                            <constraint firstItem="gqk-fq-uEN" firstAttribute="leading" secondItem="BBc-V7-Sq6" secondAttribute="leading" id="qbp-iq-lEy"/>
+                            <constraint firstItem="niH-rV-wnr" firstAttribute="centerX" secondItem="KAj-tI-KvV" secondAttribute="centerX" id="v76-gt-1Q7"/>
+                            <constraint firstItem="gqk-fq-uEN" firstAttribute="top" secondItem="Wde-vE-2Tw" secondAttribute="bottom" constant="149" id="yVY-Fa-xc8"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="passwordField" destination="BBc-V7-Sq6" id="Pj9-5d-yPu"/>
                         <outlet property="usernameField" destination="gqk-fq-uEN" id="CbP-nP-ojG"/>
+                        <segue destination="j8P-bh-Fni" kind="presentation" identifier="signUpToAddRunSegue" id="95F-rN-Hge"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sT9-Ot-dFv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="638" y="1065"/>
+            <point key="canvasLocation" x="403" y="987"/>
         </scene>
         <!--Add Run View Controller-->
         <scene sceneID="jXG-Kh-S0b">
             <objects>
-                <viewController id="j8P-bh-Fni" customClass="AddRunViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="addRunViewController" id="j8P-bh-Fni" customClass="AddRunViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="0S5-nw-iqE"/>
                         <viewControllerLayoutGuide type="bottom" id="SOd-0b-NXa"/>
@@ -181,7 +182,7 @@
                                     <action selector="signOut:" destination="j8P-bh-Fni" eventType="touchUpInside" id="Jvs-4o-OfT"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="distance" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oVR-J8-J0m">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="distance" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="oVR-J8-J0m">
                                 <rect key="frame" x="252" y="448" width="97" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="97" id="c04-c6-Bsz"/>
@@ -249,14 +250,16 @@
                         <outlet property="distanceField" destination="oVR-J8-J0m" id="WF6-zM-02O"/>
                         <outlet property="runDate" destination="kww-np-Dx6" id="hdn-ji-a6I"/>
                         <outlet property="runTable" destination="Gu8-zI-mfU" id="DsJ-P9-hKe"/>
+                        <segue destination="vXZ-lx-hvc" kind="presentation" identifier="signOutSegue" id="DhQ-v9-PhH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tbn-eC-HxL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1072" y="359"/>
+            <point key="canvasLocation" x="875" y="-121"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Svf-dB-haG"/>
+        <segue reference="re7-47-6Cs"/>
+        <segue reference="nO4-ZI-xOO"/>
     </inferredMetricsTieBreakers>
 </document>

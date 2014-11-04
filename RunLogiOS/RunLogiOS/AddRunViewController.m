@@ -25,42 +25,45 @@
     if (currentUser) {
         // do stuff with the user
         userId = currentUser.objectId;
+        
+        PFQuery *query = [PFQuery queryWithClassName:@"Runs"];
+        [query whereKey:@"userID" equalTo:userId];
+        runDictionary = [[NSMutableDictionary alloc]init];
+        
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            
+            if (!error) {
+                
+                NSString *distancePulled = @"";
+                NSString *datePulled = @"";
+                
+                for (PFObject *object in objects) {
+                    NSLog(@"%@", object.objectId);
+                    
+                    distancePulled = [object objectForKey:@"distance"];
+                    datePulled = [object objectForKey:@"date"];
+                    NSLog(@"Distance: %@ , Date: %@", distancePulled, datePulled);
+                    NSMutableDictionary *runDictionary2 = [[NSMutableDictionary alloc]init];
+                    
+                    [runDictionary2 setValue:distancePulled forKey:@"distance"];
+                    [runDictionary2 setValue:datePulled forKey:@"date"];
+                    [runDictionary2 setValue:object.objectId forKey:@"objectId"];
+                    
+                    [runArray addObject:runDictionary2];
+                    
+                }
+                [_runTable reloadData];
+            } else {
+                // Log details of the failure
+                NSLog(@"Error: %@ %@", error, [error userInfo]);
+            }
+        }];
+
+        
     } else {
         // show the signup or login screen
     }
     
-    PFQuery *query = [PFQuery queryWithClassName:@"Runs"];
-    [query whereKey:@"userID" equalTo:userId];
-    runDictionary = [[NSMutableDictionary alloc]init];
-    
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-
-        if (!error) {
-            
-            NSString *distancePulled = @"";
-            NSString *datePulled = @"";
-            
-            for (PFObject *object in objects) {
-                NSLog(@"%@", object.objectId);
-                
-                distancePulled = [object objectForKey:@"distance"];
-                datePulled = [object objectForKey:@"date"];
-                NSLog(@"Distance: %@ , Date: %@", distancePulled, datePulled);
-                NSMutableDictionary *runDictionary2 = [[NSMutableDictionary alloc]init];
-                
-                [runDictionary2 setValue:distancePulled forKey:@"distance"];
-                [runDictionary2 setValue:datePulled forKey:@"date"];
-                [runDictionary2 setValue:object.objectId forKey:@"objectId"];
-                
-                [runArray addObject:runDictionary2];
-                
-            }
-            [_runTable reloadData];
-        } else {
-            // Log details of the failure
-            NSLog(@"Error: %@ %@", error, [error userInfo]);
-        }
-    }];
 }
 -(void)addRun:(id)sender {
     
@@ -81,6 +84,8 @@
     [runDictionary setValue:distance forKey:@"distance"];
     [runDictionary setValue:dateString forKey:@"date"];
     [_runTable reloadData];
+    
+    [_distanceField setText:@""];
 }
 -(void)deleteRun:(id)sender {
     
@@ -117,10 +122,12 @@
 }
 -(void)signOut:(id)sender {
     [PFUser logOut];
+    [self performSegueWithIdentifier:@"signOutSegue" sender:self];
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     return [runArray count];
+    
 }
 
 
