@@ -25,6 +25,18 @@
 }
 -(void)login:(id)sender {
     
+    username = [_usernameField text];
+    password = [_passwordField text];
+    [PFUser logInWithUsernameInBackground:username password:password
+                                    block:^(PFUser *user, NSError *error) {
+                                        if (user) {
+                                            // Do stuff after successful login.
+                                            NSLog(@"Logged in");
+                                        } else {
+                                            // The login failed. Check error to see why.
+                                            NSLog(@"Not logged in");
+                                        }
+                                    }];
 }
 -(void)signUp:(id)sender {
     

@@ -21,14 +21,22 @@
     _distanceField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     [_distanceField setDelegate:self];
     
+    PFUser *currentUser = [PFUser currentUser];
+    if (currentUser) {
+        // do stuff with the user
+        userId = currentUser.objectId;
+    } else {
+        // show the signup or login screen
+    }
+    
     PFQuery *query = [PFQuery queryWithClassName:@"Runs"];
-    //[query whereKey:@"playerName" equalTo:@"Dan Stemkoski"];
+    [query whereKey:@"userID" equalTo:userId];
     runDictionary = [[NSMutableDictionary alloc]init];
     
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+
         if (!error) {
             
-            NSLog(@"Successfully retrieved %lu scores.", (unsigned long)objects.count);
             NSString *distancePulled = @"";
             NSString *datePulled = @"";
             
@@ -66,7 +74,7 @@
     PFObject *newRun = [PFObject objectWithClassName:@"Runs"];
     newRun[@"distance"] = distance;
     newRun[@"date"] = dateString;
-    newRun[@"userID"] = @NO;
+    newRun[@"userID"] = userId;
     [newRun saveInBackground];
     
     [runArray addObject:newRun];
@@ -89,26 +97,11 @@
         
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             if (!error) {
-                
-                NSLog(@"Successfully retrieved %lu scores.", (unsigned long)objects.count);
-                NSString *distancePulled = @"";
-                NSString *datePulled = @"";
-                
+    
                 for (PFObject *object in objects) {
                     NSLog(@"%@", object.objectId);
                     
                     [object deleteInBackground];
-                    /*
-                    distancePulled = [object objectForKey:@"distance"];
-                    datePulled = [object objectForKey:@"date"];
-                    NSLog(@"Distance: %@ , Date: %@", distancePulled, datePulled);
-                    NSMutableDictionary *runDictionary2 = [[NSMutableDictionary alloc]init];
-                    
-                    [runDictionary2 setValue:distancePulled forKey:@"distance"];
-                    [runDictionary2 setValue:datePulled forKey:@"date"];
-                    [runDictionary2 setValue:object.objectId forKey:@"objectID"];
-                    
-                    [runArray addObject:runDictionary2];*/
                     
                 }
             } else {
@@ -123,7 +116,7 @@
 
 }
 -(void)signOut:(id)sender {
-    
+    [PFUser logOut];
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     

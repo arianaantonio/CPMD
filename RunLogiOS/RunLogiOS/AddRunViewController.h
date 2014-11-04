@@ -12,10 +12,12 @@
 {
     NSMutableArray *runArray;
     NSMutableDictionary *runDictionary;
+    NSString *userId;
 }
 @property (nonatomic, strong) IBOutlet UITextField *distanceField;
 @property (nonatomic, strong) IBOutlet UIDatePicker *runDate;
 @property (nonatomic, strong) IBOutlet UITableView *runTable;
+
 
 -(IBAction)addRun:(id)sender;
 -(IBAction)deleteRun:(id)sender;
