@@ -226,6 +226,15 @@
                                     <outlet property="delegate" destination="j8P-bh-Fni" id="L6G-bj-dmj"/>
                                 </connections>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zw2-mY-zwY">
+                                <rect key="frame" x="217" y="554" width="167" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="167" id="TrK-wo-PYw"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -233,14 +242,17 @@
                             <constraint firstItem="oVR-J8-J0m" firstAttribute="top" secondItem="kww-np-Dx6" secondAttribute="bottom" constant="8" symbolic="YES" id="0wR-nH-Wia"/>
                             <constraint firstItem="Gu8-zI-mfU" firstAttribute="top" secondItem="0S5-nw-iqE" secondAttribute="bottom" constant="24" id="GM0-fG-IdG"/>
                             <constraint firstAttribute="trailingMargin" secondItem="LAG-M3-VSb" secondAttribute="trailing" constant="5" id="LgA-2x-Whh"/>
+                            <constraint firstItem="zw2-mY-zwY" firstAttribute="baseline" secondItem="LAG-M3-VSb" secondAttribute="baseline" id="VZs-fU-sB7"/>
                             <constraint firstAttribute="bottom" secondItem="A0R-1S-eGe" secondAttribute="bottom" constant="20" symbolic="YES" id="WU3-Ys-MrZ"/>
                             <constraint firstItem="A0R-1S-eGe" firstAttribute="leading" secondItem="cIq-yb-1o0" secondAttribute="leadingMargin" id="XoZ-KB-EHs"/>
                             <constraint firstItem="Pyz-3z-vQD" firstAttribute="top" secondItem="oVR-J8-J0m" secondAttribute="bottom" constant="8" symbolic="YES" id="abm-MY-axs"/>
                             <constraint firstItem="SOd-0b-NXa" firstAttribute="top" secondItem="Pyz-3z-vQD" secondAttribute="bottom" constant="84" id="bZs-Jl-4OY"/>
                             <constraint firstItem="A0R-1S-eGe" firstAttribute="baseline" secondItem="LAG-M3-VSb" secondAttribute="baseline" id="dXC-Eh-C1D"/>
                             <constraint firstItem="A0R-1S-eGe" firstAttribute="leading" secondItem="Gu8-zI-mfU" secondAttribute="leading" id="goV-FP-lxl"/>
+                            <constraint firstItem="zw2-mY-zwY" firstAttribute="centerX" secondItem="Pyz-3z-vQD" secondAttribute="centerX" id="gvY-7y-VP1"/>
                             <constraint firstItem="oVR-J8-J0m" firstAttribute="centerX" secondItem="kww-np-Dx6" secondAttribute="centerX" id="jD9-6u-h99"/>
                             <constraint firstItem="kww-np-Dx6" firstAttribute="centerX" secondItem="Gu8-zI-mfU" secondAttribute="centerX" id="l5C-Mh-1KG"/>
+                            <constraint firstAttribute="centerX" secondItem="zw2-mY-zwY" secondAttribute="centerX" constant="-0.5" id="r4n-uI-9oa"/>
                             <constraint firstItem="oVR-J8-J0m" firstAttribute="centerX" secondItem="Pyz-3z-vQD" secondAttribute="centerX" id="vCT-rF-If2"/>
                             <constraint firstItem="kww-np-Dx6" firstAttribute="leading" secondItem="cIq-yb-1o0" secondAttribute="leading" id="x0K-u1-WPD"/>
                             <constraint firstItem="kww-np-Dx6" firstAttribute="top" secondItem="Gu8-zI-mfU" secondAttribute="bottom" constant="23" id="xg8-U1-Xgr"/>
@@ -250,6 +262,7 @@
                         <outlet property="distanceField" destination="oVR-J8-J0m" id="WF6-zM-02O"/>
                         <outlet property="runDate" destination="kww-np-Dx6" id="hdn-ji-a6I"/>
                         <outlet property="runTable" destination="Gu8-zI-mfU" id="DsJ-P9-hKe"/>
+                        <outlet property="usernameLabel" destination="zw2-mY-zwY" id="8GM-y2-t1m"/>
                         <segue destination="vXZ-lx-hvc" kind="presentation" identifier="signOutSegue" id="DhQ-v9-PhH"/>
                     </connections>
                 </viewController>

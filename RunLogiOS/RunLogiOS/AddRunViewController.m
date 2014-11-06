@@ -25,7 +25,8 @@
     if (currentUser) {
         // do stuff with the user
         userId = currentUser.objectId;
-        
+        //[currentUser objectForKey:@"username"];
+       // [_usernameLabel setText:[currentUser objectForKey:@"username"]];
         PFQuery *query = [PFQuery queryWithClassName:@"Runs"];
         [query whereKey:@"userID" equalTo:userId];
         runDictionary = [[NSMutableDictionary alloc]init];
@@ -34,12 +35,12 @@
             
             if (!error) {
                 
-                NSString *distancePulled = @"";
+                //NSString *distancePulled = @"";
                 NSString *datePulled = @"";
+                NSNumber *distancePulled = 0;
                 
                 for (PFObject *object in objects) {
                     NSLog(@"%@", object.objectId);
-                    
                     distancePulled = [object objectForKey:@"distance"];
                     datePulled = [object objectForKey:@"date"];
                     NSLog(@"Distance: %@ , Date: %@", distancePulled, datePulled);
@@ -72,17 +73,20 @@
     [df setDateFormat:@"MM/dd/yyyy"];
     NSString *dateString = [df stringFromDate:date];
     NSString *distance = [_distanceField text];
-    float distanceInt = [distance floatValue];
+    NSNumberFormatter *numFormatter = [[NSNumberFormatter alloc] init];
+    [numFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    NSNumber *distanceNum = [numFormatter numberFromString:distance];
     
     PFObject *newRun = [PFObject objectWithClassName:@"Runs"];
-    newRun[@"distance"] = distance;
+    newRun[@"distance"] = distanceNum;
     newRun[@"date"] = dateString;
     newRun[@"userID"] = userId;
     [newRun saveInBackground];
     
     [runArray addObject:newRun];
-    [runDictionary setValue:distance forKey:@"distance"];
-    [runDictionary setValue:dateString forKey:@"date"];
+    NSMutableDictionary *runDictionary2 = [[NSMutableDictionary alloc]init];
+    [runDictionary2 setValue:distanceNum forKey:@"distance"];
+    [runDictionary2 setValue:dateString forKey:@"date"];
     [_runTable reloadData];
     
     [_distanceField setText:@""];
@@ -98,7 +102,6 @@
         
         PFQuery *query = [PFQuery queryWithClassName:@"Runs"];
         [query whereKey:@"objectId" equalTo:objectID];
-        runDictionary = [[NSMutableDictionary alloc]init];
         
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             if (!error) {
@@ -134,12 +137,12 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"runCell"];
-    //for (int i = 0; i <[runArray count]; i++) {
         
     if (cell != nil) {
         runDictionary = [runArray objectAtIndex:indexPath.row];
         cell.textLabel.text = [runDictionary objectForKey:@"date"];
-        cell.detailTextLabel.text = [runDictionary objectForKey:@"distance"];
+        //NSString *numToString = [
+        cell.detailTextLabel.text = [[runDictionary objectForKey:@"distance"]stringValue];
         return cell;
     }
    // }
