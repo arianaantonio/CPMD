@@ -87,9 +87,38 @@
     NSMutableDictionary *runDictionary2 = [[NSMutableDictionary alloc]init];
     [runDictionary2 setValue:distanceNum forKey:@"distance"];
     [runDictionary2 setValue:dateString forKey:@"date"];
-    [_runTable reloadData];
-    
+    [runArray removeAllObjects];
     [_distanceField setText:@""];
+    PFQuery *query2 = [PFQuery queryWithClassName:@"Runs"];
+    [query2 whereKey:@"userID" equalTo:userId];
+    
+    [query2 findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        
+        if (!error) {
+            
+            NSString *datePulled = @"";
+            NSNumber *distancePulled = 0;
+            
+            for (PFObject *object in objects) {
+                NSLog(@"%@", object.objectId);
+                distancePulled = [object objectForKey:@"distance"];
+                datePulled = [object objectForKey:@"date"];
+                NSLog(@"Distance: %@ , Date: %@", distancePulled, datePulled);
+                NSMutableDictionary *runDictionary2 = [[NSMutableDictionary alloc]init];
+                
+                [runDictionary2 setValue:distancePulled forKey:@"distance"];
+                [runDictionary2 setValue:datePulled forKey:@"date"];
+                [runDictionary2 setValue:object.objectId forKey:@"objectId"];
+                
+                [runArray addObject:runDictionary2];
+                
+            }
+            [_runTable reloadData];
+        }
+    }];
+    [_runTable reloadData];
+
+
 }
 -(void)deleteRun:(id)sender {
     
@@ -120,7 +149,6 @@
         [runArray removeObjectAtIndex:selectedIndexPath.row];
         [_runTable reloadData];
     }
-    
 
 }
 -(void)signOut:(id)sender {
