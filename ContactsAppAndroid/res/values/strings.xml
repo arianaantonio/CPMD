@@ -15,5 +15,6 @@
     <string name="add">Add Run</string>
     <string name="delete">Delete Run</string>
     <string name="signOut">Sign Out</string>
+    <string name="updateRun">Update Run</string>
    
 </resources>

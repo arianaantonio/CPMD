@@ -68,7 +68,7 @@ public class ParseStarterProjectActivity extends Activity {
 				
 			}
 			
-		}); 
+		});  
 		
 		signupButton.setOnClickListener(new OnClickListener(){
  
