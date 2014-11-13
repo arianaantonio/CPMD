@@ -7,6 +7,7 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
@@ -32,7 +33,7 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 public class ContactsActivity extends Activity {
-	
+
 	String distance;
 	String date;
 	EditText distanceText;
@@ -42,7 +43,6 @@ public class ContactsActivity extends Activity {
 	Button signOut;
 	Button refreshButton;
 	String TAG = "Contacts Activity";
-	ParseObject runObject = new ParseObject("Runs");
 	ListView runsList;
 	static ArrayList<HashMap<String, ?>> myData = new ArrayList<HashMap<String, ?>>();
 	SimpleAdapter adapter;
@@ -54,13 +54,13 @@ public class ContactsActivity extends Activity {
 	NetworkConnect networkConnection;
 	Boolean networkConn;
 	ParseUser currentUser;
-	
+	private View currentSelectedView;
+
 	@Override      
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.contacts_layout);
 		context = this;
-		
 		networkConnection = new NetworkConnect();
 		networkConn = networkConnection.connectionStatus(context);
 		objectToDelete = "";
@@ -73,27 +73,29 @@ public class ContactsActivity extends Activity {
 		runsList.setAdapter(adapter);
 		currentUser = ParseUser.getCurrentUser();
 		username = currentUser.getUsername();
-		usernameView.setText(username);
-		
+		usernameView.setText(username); 
+
 		if (!networkConn) {
 			Toast.makeText(context, "Please connect to a network", Toast.LENGTH_LONG).show();
 		} else {  
-			
+
 			ParseQuery<ParseObject> query = ParseQuery.getQuery("Runs");
 			query.whereEqualTo("userID", currentUser); 
+			query.orderByAscending("createdAt");
 			query.findInBackground(new FindCallback<ParseObject>() { 
-	   
+
 				@Override
 				public void done(List<ParseObject> objects,
 						com.parse.ParseException e) {
 					Log.d("score", "retrieved: " +objects);
 					String pulledName;
-					float pulledNumber;
+					Double pulledNumber;
 					String pulledID;
 					myData.clear();
 					for (int i = 0; i < objects.size(); i++) {
 						pulledName = objects.get(i).getString("date");
-						pulledNumber = objects.get(i).getInt("distance");
+						pulledNumber = objects.get(i).getDouble("distance");
+						Log.i("Runs", "Pulled number: " +pulledNumber);
 						pulledID = objects.get(i).getObjectId(); 
 						Log.i("test", "test: " +pulledName+ " " +pulledNumber);
 						HashMap<String, Object> displayText = new HashMap<String, Object>();
@@ -106,50 +108,89 @@ public class ContactsActivity extends Activity {
 				}
 			});
 		}
-			
-			
-			runsList.setOnItemClickListener(new OnItemClickListener(){
-	  
-				@Override
-				public void onItemClick(AdapterView<?> parent, View view,
-						int position, long id) {
-					Log.i(TAG, "Clicked: " +position);
-					objectToDelete = myData.get(position).get("objectID").toString();
-					Log.i(TAG, "To delete: " +objectToDelete); 
+
+		runsList.setOnItemClickListener(new OnItemClickListener(){
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				Log.i(TAG, "Clicked: " +position);
+				objectToDelete = myData.get(position).get("objectID").toString();
+				Log.i(TAG, "To delete: " +objectToDelete); 
+				if (currentSelectedView != null && currentSelectedView != view) {
+					unhighlightCurrentRow(currentSelectedView);
 				}
-				
-			});
-			
-			addRun = (Button) findViewById(R.id.addButton);
-			deleteRun = (Button) findViewById(R.id.deleteButton);
-			deleteRun.setOnClickListener(new OnClickListener(){
-	
-				@Override
-				public void onClick(View v) {
-					if (networkConn) {
-						ParseQuery<ParseObject> query = ParseQuery.getQuery("Runs");
-						query.getInBackground(objectToDelete, new GetCallback<ParseObject>() {
-		
-							@Override
-							public void done(ParseObject object,
-									com.parse.ParseException e) {
-								object.deleteInBackground();
-							}
+
+				currentSelectedView = view;
+				highlightCurrentRow(currentSelectedView);
+				//other codes 
+			}
+
+		});
+
+		addRun = (Button) findViewById(R.id.addButton);
+		deleteRun = (Button) findViewById(R.id.deleteButton);
+		deleteRun.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				if (networkConn) {
+					ParseQuery<ParseObject> query = ParseQuery.getQuery("Runs");
+					query.getInBackground(objectToDelete, new GetCallback<ParseObject>() {
+
+						@Override
+						public void done(ParseObject object,
+								com.parse.ParseException e) { 
+							object.deleteInBackground();
+
+							ParseQuery<ParseObject> query2 = ParseQuery.getQuery("Runs");
+							query2.whereEqualTo("userID", currentUser);
+							query2.orderByAscending("createdAt");
+							query2.findInBackground(new FindCallback<ParseObject>() { 
+
+								@Override
+								public void done(List<ParseObject> objects,
+										com.parse.ParseException e) {
+									String pulledName;
+									double pulledNumber;
+									String pulledID;
+									myData.clear();
+									for (int i = 0; i < objects.size(); i++) {
+										pulledName = objects.get(i).getString("date");
+										pulledNumber = objects.get(i).getDouble("distance");
+										pulledID = objects.get(i).getObjectId();
+										Log.i("test", "test: " +pulledName+ " " +pulledNumber);
+										HashMap<String, Object> displayText = new HashMap<String, Object>();
+										displayText.put("date", pulledName);
+										displayText.put("distance", pulledNumber);
+										displayText.put("objectID", pulledID); 
+										myData.add(displayText);
+										adapter.notifyDataSetChanged();
+										if (currentSelectedView != null) {
+											unhighlightCurrentRow(currentSelectedView);
+										}
+									}
+								}
 							});
+
+						}
+					});
+					/*
 						ParseQuery<ParseObject> query2 = ParseQuery.getQuery("Runs");
 						query2.whereEqualTo("userID", currentUser);
+						query2.orderByAscending("createdAt");
 						query2.findInBackground(new FindCallback<ParseObject>() { 
-		
+
 							@Override
 							public void done(List<ParseObject> objects,
 									com.parse.ParseException e) {
 								String pulledName;
-								float pulledNumber;
+								double pulledNumber;
 								String pulledID;
 								myData.clear();
 								for (int i = 0; i < objects.size(); i++) {
 									pulledName = objects.get(i).getString("date");
-									pulledNumber = objects.get(i).getInt("distance");
+									pulledNumber = objects.get(i).getDouble("distance");
 									pulledID = objects.get(i).getObjectId();
 									Log.i("test", "test: " +pulledName+ " " +pulledNumber);
 									HashMap<String, Object> displayText = new HashMap<String, Object>();
@@ -158,129 +199,169 @@ public class ContactsActivity extends Activity {
 									displayText.put("objectID", pulledID); 
 									myData.add(displayText);
 									adapter.notifyDataSetChanged();
+									if (currentSelectedView != null) {
+								        unhighlightCurrentRow(currentSelectedView);
+								    }
+								}
+							}
+						});*/
+				} else {
+					Toast.makeText(context, "Please connect to a network", Toast.LENGTH_LONG).show();
+				}
+			}
+		});
+		signOut = (Button) findViewById(R.id.signoutButton);
+		signOut.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				ParseUser.logOut();
+				myData.clear();
+				Intent intent = new Intent(getBaseContext(), ParseStarterProjectActivity.class);
+				startActivity(intent);
+
+			}
+
+		});
+		addRun.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				if (networkConn) {
+					Log.i("Runs", "Add");
+					distance = distanceText.getText().toString();
+					int day = dateText.getDayOfMonth();
+					int month = dateText.getMonth()+1;
+					int year = dateText.getYear();
+					date = month+"/"+day+"/"+year; 
+					Log.i("TAG", "Date: " +date);
+
+					if (distance.isEmpty()) {
+						Toast.makeText(getApplicationContext(), "Please enter a distance",
+								Toast.LENGTH_SHORT).show();  
+					} else {
+						float distanceNum = Float.valueOf(distance);
+						ParseObject runObject = new ParseObject("Runs");
+						runObject.put("date", date);
+						runObject.put("distance", distanceNum);
+						runObject.put("userID", currentUser);
+						runObject.saveInBackground();
+
+						//HashMap<String, Object> displayText = new HashMap<String, Object>();
+						//displayText.put("date", date);   
+						//displayText.put("distance", distanceNum);
+						//myData.add(displayText);
+						//adapter.notifyDataSetChanged();
+						distanceText.setText(""); 
+
+						ParseQuery<ParseObject> query = ParseQuery.getQuery("Runs");
+						query.whereEqualTo("userID", currentUser); 
+						query.orderByAscending("createdAt");
+						query.findInBackground(new FindCallback<ParseObject>() { 
+
+							@Override
+							public void done(List<ParseObject> objects,
+									com.parse.ParseException e) {
+								Log.d("score", "retrieved: " +objects);
+								String pulledName;
+								double pulledNumber;
+								String pulledID;
+								myData.clear();
+								for (int i = 0; i < objects.size(); i++) {
+									pulledName = objects.get(i).getString("date");
+									pulledNumber = objects.get(i).getDouble("distance");
+									pulledID = objects.get(i).getObjectId(); 
+									Log.i("test", "test: " +pulledName+ " " +pulledNumber);
+									HashMap<String, Object> displayText = new HashMap<String, Object>();
+									displayText.put("date", pulledName);
+									displayText.put("distance", pulledNumber);
+									displayText.put("objectID", pulledID);
+									myData.add(displayText);  
+									adapter.notifyDataSetChanged();
 								}
 							}
 						});
-					} else {
-						Toast.makeText(context, "Please connect to a network", Toast.LENGTH_LONG).show();
 					}
+				} else {
+					Toast.makeText(context, "Please connect to a network", Toast.LENGTH_LONG).show();
 				}
-			});
-			signOut = (Button) findViewById(R.id.signoutButton);
-			signOut.setOnClickListener(new OnClickListener(){
-	
-				@Override
-				public void onClick(View v) {
-					ParseUser.logOut();
-					myData.clear();
-					Intent intent = new Intent(getBaseContext(), ParseStarterProjectActivity.class);
-					startActivity(intent);
-					
-				}
-				
-			});
-			addRun.setOnClickListener(new OnClickListener(){
-	
-				@Override
-				public void onClick(View v) {
-					if (networkConn) {
-						distance = distanceText.getText().toString();
-						int day = dateText.getDayOfMonth();
-						int month = dateText.getMonth()+1;
-						int year = dateText.getYear();
-						date = month+"/"+day+"/"+year;
-						Log.i("TAG", "Date: " +date);
-						   
-						if (distance.isEmpty()) {
-							Toast.makeText(getApplicationContext(), "Please enter a distance",
-									   Toast.LENGTH_SHORT).show();  
-						} else {
-							float distanceNum = Float.valueOf(distance);
-							runObject.put("date", date);
-							runObject.put("distance", distanceNum);
-							runObject.put("userID", currentUser);
-							runObject.saveInBackground();
-							
-							//HashMap<String, Object> displayText = new HashMap<String, Object>();
-							//displayText.put("date", date);   
-							//displayText.put("distance", distanceNum);
-							//myData.add(displayText);
-							//adapter.notifyDataSetChanged();
-							distanceText.setText(""); 
-							
-							ParseQuery<ParseObject> query = ParseQuery.getQuery("Runs");
-							query.whereEqualTo("userID", currentUser); 
-							query.findInBackground(new FindCallback<ParseObject>() { 
-					   
-								@Override
-								public void done(List<ParseObject> objects,
-										com.parse.ParseException e) {
-									Log.d("score", "retrieved: " +objects);
-									String pulledName;
-									float pulledNumber;
-									String pulledID;
-									myData.clear();
-									for (int i = 0; i < objects.size(); i++) {
-										pulledName = objects.get(i).getString("date");
-										pulledNumber = objects.get(i).getInt("distance");
-										pulledID = objects.get(i).getObjectId(); 
-										Log.i("test", "test: " +pulledName+ " " +pulledNumber);
-										HashMap<String, Object> displayText = new HashMap<String, Object>();
-										displayText.put("date", pulledName);
-										displayText.put("distance", pulledNumber);
-										displayText.put("objectID", pulledID);
-										myData.add(displayText);  
-										adapter.notifyDataSetChanged();
-									}
-								}
-							});
-						}
+			}
+		});
+		updateRunButton = (Button) findViewById(R.id.updateRunButton);
+		updateRunButton.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) { 
+				if (networkConn) {
+					Log.i("Runs", "Update");
+					ParseQuery<ParseObject> query = ParseQuery.getQuery("Runs");
+					distance = distanceText.getText().toString();
+					int day = dateText.getDayOfMonth();
+					int month = dateText.getMonth()+1;
+					int year = dateText.getYear();
+					date = month+"/"+day+"/"+year;
+					if (distance.isEmpty()) { 
+						Toast.makeText(getApplicationContext(), "Please enter a distance",
+								Toast.LENGTH_SHORT).show();  
 					} else {
-						Toast.makeText(context, "Please connect to a network", Toast.LENGTH_LONG).show();
-					}
-				}
-			});
-			updateRunButton = (Button) findViewById(R.id.updateRunButton);
-			updateRunButton.setOnClickListener(new OnClickListener(){
-	
-				@Override
-				public void onClick(View v) { 
-					if (networkConn) {
-						ParseQuery<ParseObject> query = ParseQuery.getQuery("Runs");
-						distance = distanceText.getText().toString();
-						int day = dateText.getDayOfMonth();
-						int month = dateText.getMonth()+1;
-						int year = dateText.getYear();
-						date = month+"/"+day+"/"+year;
-						if (distance.isEmpty()) {
-							Toast.makeText(getApplicationContext(), "Please enter a distance",
-									   Toast.LENGTH_SHORT).show();  
-						} else {
-							final float distanceNum = Float.valueOf(distance);
-							query.getInBackground(objectToDelete, new GetCallback<ParseObject>() {
-		
+						final float distanceNum = Float.valueOf(distance);
+						query.getInBackground(objectToDelete, new GetCallback<ParseObject>() {
+
 							@Override
 							public void done(ParseObject newRun, ParseException e) {
 								newRun.put("date", date);
-							    newRun.put("distance", distanceNum);
-							    newRun.saveInBackground();
+								newRun.put("distance", distanceNum);
+								newRun.saveInBackground();
+
+								ParseQuery<ParseObject> queryUpdate = ParseQuery.getQuery("Runs");
+								queryUpdate.whereEqualTo("userID", currentUser); 
+								queryUpdate.orderByAscending("createdAt");
+								queryUpdate.findInBackground(new FindCallback<ParseObject>() { 
+
+									@Override
+									public void done(List<ParseObject> objects,
+											com.parse.ParseException e) {
+										Log.d("score", "retrieved: " +objects);
+										String pulledName;
+										double pulledNumber;
+										String pulledID;
+										myData.clear(); 
+										for (int i = 0; i < objects.size(); i++) {
+											pulledName = objects.get(i).getString("date");
+											pulledNumber = objects.get(i).getDouble("distance");
+											pulledID = objects.get(i).getObjectId(); 
+											Log.i("test", "test: " +pulledName+ " " +pulledNumber);
+											HashMap<String, Object> displayText = new HashMap<String, Object>();
+											displayText.put("date", pulledName);
+											displayText.put("distance", pulledNumber);
+											displayText.put("objectID", pulledID);
+											myData.add(displayText); 
+											distanceText.setText("");
+											adapter.notifyDataSetChanged();
+											if (currentSelectedView != null) {
+												unhighlightCurrentRow(currentSelectedView);
+											}
+										}
+									}
+								});
 							}
-							});
+						});/*
 							ParseQuery<ParseObject> queryUpdate = ParseQuery.getQuery("Runs");
 							queryUpdate.whereEqualTo("userID", currentUser); 
+							//query.orderByAscending("createdAt");
 							queryUpdate.findInBackground(new FindCallback<ParseObject>() { 
-					   
+
 								@Override
 								public void done(List<ParseObject> objects,
 										com.parse.ParseException e) {
 									Log.d("score", "retrieved: " +objects);
 									String pulledName;
-									float pulledNumber;
+									double pulledNumber;
 									String pulledID;
-									myData.clear();
+									myData.clear(); 
 									for (int i = 0; i < objects.size(); i++) {
 										pulledName = objects.get(i).getString("date");
-										pulledNumber = objects.get(i).getInt("distance");
+										pulledNumber = objects.get(i).getDouble("distance");
 										pulledID = objects.get(i).getObjectId(); 
 										Log.i("test", "test: " +pulledName+ " " +pulledNumber);
 										HashMap<String, Object> displayText = new HashMap<String, Object>();
@@ -290,121 +371,143 @@ public class ContactsActivity extends Activity {
 										myData.add(displayText); 
 										distanceText.setText("");
 										adapter.notifyDataSetChanged();
+										if (currentSelectedView != null) {
+									        unhighlightCurrentRow(currentSelectedView);
+									    }
 									}
 								}
-							});
-						}
-					} else {
-						Toast.makeText(context, "Please connect to a network", Toast.LENGTH_LONG).show();
+							});*/
 					}
+				} else {
+					Toast.makeText(context, "Please connect to a network", Toast.LENGTH_LONG).show();
 				}
-				
-			});
-			refreshButton = (Button) findViewById(R.id.refreshButton);
-			refreshButton.setOnClickListener(new OnClickListener(){
-	
-				@Override
-				public void onClick(View v) {
-					if (networkConn) {
-						ParseQuery<ParseObject> query = ParseQuery.getQuery("Runs");
-						query.whereEqualTo("userID", currentUser); 
-						query.findInBackground(new FindCallback<ParseObject>() { 
-				   
-							@Override
-							public void done(List<ParseObject> objects,
-									com.parse.ParseException e) {
-								Log.d("score", "retrieved: " +objects);
-								String pulledName;
-								float pulledNumber;
-								String pulledID;
-								myData.clear();
-								for (int i = 0; i < objects.size(); i++) {
-									pulledName = objects.get(i).getString("date");
-									pulledNumber = objects.get(i).getInt("distance");
-									pulledID = objects.get(i).getObjectId(); 
-									Log.i("test", "test: " +pulledName+ " " +pulledNumber);
-									HashMap<String, Object> displayText = new HashMap<String, Object>();
-									displayText.put("date", pulledName);
-									displayText.put("distance", pulledNumber);
-									displayText.put("objectID", pulledID);
-									myData.add(displayText); 
-									adapter.notifyDataSetChanged();
-								}
-							}
-						});
-					} else {
-						Toast.makeText(context, "Please connect to a network", Toast.LENGTH_LONG).show();
-					}
-				}
-				
-			});
-			new CountDownTimer(20000, 1000) {
-				 int runsCount = 0;
-			     public void onTick(long millisUntilFinished) {
-			    	 
-			     }
-	
-			     public void onFinish() {
-			    	 networkConn = networkConnection.connectionStatus(context);
-			    	 
-			    	 if (networkConn) {
-			    		 Log.i("Main", "Connected");
-			    		 Toast.makeText(context, "Connected", Toast.LENGTH_SHORT).show();
-				    	 ParseQuery<ParseObject> query = ParseQuery.getQuery("Runs");
-				    	 query.whereEqualTo("userID", currentUser);
-				    	 query.countInBackground(new CountCallback() {
-				    	   public void done(int count, ParseException e) {
-				    	     if (e == null) {
-				    	    	 runsCount = count; 
-				    	    	 Log.i("Runs", "App: " +myData.size()+ " Server: " +runsCount);
-				    	    	 if (runsCount != myData.size()) {
-				    	    		 ParseQuery<ParseObject> query = ParseQuery.getQuery("Runs");
-				    					query.whereEqualTo("userID", currentUser); 
-				    					query.findInBackground(new FindCallback<ParseObject>() { 
-				    			   
-				    						@Override
-				    						public void done(List<ParseObject> objects,
-				    								com.parse.ParseException e) {
-				    							Log.d("score", "retrieved: " +objects); 
-				    							String pulledName;
-				    							float pulledNumber;
-				    							String pulledID;
-				    							myData.clear();
-				    							for (int i = 0; i < objects.size(); i++) {
-				    								pulledName = objects.get(i).getString("date");
-				    								pulledNumber = objects.get(i).getInt("distance");
-				    								pulledID = objects.get(i).getObjectId(); 
-				    								Log.i("test", "test: " +pulledName+ " " +pulledNumber);
-				    								HashMap<String, Object> displayText = new HashMap<String, Object>();
-				    								displayText.put("date", pulledName);
-				    								displayText.put("distance", pulledNumber);
-				    								displayText.put("objectID", pulledID);
-				    								myData.add(displayText); 
-				    								adapter.notifyDataSetChanged();
-				    							}
-				    						}
-				    					});
-				    	    	 } else {
-				    	    		 Log.i("Runs Activity", "No new runs");
-				    	    	 }
-				    	       Log.d(TAG, "User has gone on " + count + " runs");
-				    	     } else {
-				    	       
-				    	     }
-				    	   }
-				    	 });
-			    	 } else {
-			    		 //Toast.makeText(context, "Please connect to a network", Toast.LENGTH_LONG).show();
-			    		 Log.i("Main", "Not connected");
-			    		 Toast.makeText(context, "Not connected", Toast.LENGTH_SHORT).show();
-			    	 }
-			    	 start();
-			     }
-			  }.start();
+			}
 
-		
+		});
+		refreshButton = (Button) findViewById(R.id.refreshButton);
+		refreshButton.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				if (networkConn) {
+					ParseQuery<ParseObject> query = ParseQuery.getQuery("Runs");
+					query.whereEqualTo("userID", currentUser); 
+					query.orderByAscending("createdAt");
+					query.findInBackground(new FindCallback<ParseObject>() { 
+
+						@Override
+						public void done(List<ParseObject> objects,
+								com.parse.ParseException e) {
+							Log.d("score", "retrieved: " +objects);
+							String pulledName;
+							double pulledNumber;
+							String pulledID;
+							myData.clear();
+							for (int i = 0; i < objects.size(); i++) {
+								pulledName = objects.get(i).getString("date");
+								pulledNumber = objects.get(i).getDouble("distance");
+								pulledID = objects.get(i).getObjectId(); 
+								Log.i("test", "test: " +pulledName+ " " +pulledNumber);
+								HashMap<String, Object> displayText = new HashMap<String, Object>();
+								displayText.put("date", pulledName);
+								displayText.put("distance", pulledNumber);
+								displayText.put("objectID", pulledID);
+								myData.add(displayText); 
+								adapter.notifyDataSetChanged();
+							}
+						}
+					});
+				} else {
+					Toast.makeText(context, "Please connect to a network", Toast.LENGTH_LONG).show();
+				}
+			}
+
+		});
+		new CountDownTimer(20000, 1000) {
+			int runsCount = 0;
+			public void onTick(long millisUntilFinished) {
+
+			}
+
+			public void onFinish() {
+				networkConn = networkConnection.connectionStatus(context);
+
+				if (networkConn) {
+					Log.i("Main", "Connected");
+					//Toast.makeText(context, "Connected", Toast.LENGTH_SHORT).show();
+					ParseQuery<ParseObject> query = ParseQuery.getQuery("Runs");
+					query.whereEqualTo("userID", currentUser);
+					query.countInBackground(new CountCallback() {
+						public void done(int count, ParseException e) {
+							if (e == null) {
+								runsCount = count; 
+								Log.i("Runs", "App: " +myData.size()+ " Server: " +runsCount);
+								if (runsCount != myData.size()) {
+									ParseQuery<ParseObject> query = ParseQuery.getQuery("Runs");
+									query.whereEqualTo("userID", currentUser); 
+									query.orderByAscending("createdAt");  
+									query.findInBackground(new FindCallback<ParseObject>() { 
+
+										@Override
+										public void done(List<ParseObject> objects,
+												com.parse.ParseException e) {
+											Log.d("score", "retrieved: " +objects); 
+											String pulledName;
+											double pulledNumber;
+											String pulledID;
+											myData.clear();
+											for (int i = 0; i < objects.size(); i++) {
+												pulledName = objects.get(i).getString("date");
+												pulledNumber = objects.get(i).getDouble("distance");
+												pulledID = objects.get(i).getObjectId(); 
+												Log.i("test", "test: " +pulledName+ " " +pulledNumber);
+												HashMap<String, Object> displayText = new HashMap<String, Object>();
+												displayText.put("date", pulledName);
+												displayText.put("distance", pulledNumber);
+												displayText.put("objectID", pulledID);
+												myData.add(displayText); 
+												adapter.notifyDataSetChanged();
+											}
+										} 
+									});
+								} else {
+									Log.i("Runs Activity", "No new runs");
+								}
+								Log.d(TAG, "User has gone on " + count + " runs");
+							} else {
+
+							}
+						}
+					});
+				} else {
+					//Toast.makeText(context, "Please connect to a network", Toast.LENGTH_LONG).show();
+					Log.i("Main", "Not connected");
+					//Toast.makeText(context, "Not connected", Toast.LENGTH_SHORT).show();
+				}
+				start();
+			}
+		}.start();
+
+
 
 	}
-	
+	private void unhighlightCurrentRow(View rowView) {
+		rowView.setBackgroundColor(Color.TRANSPARENT);
+		TextView textView = (TextView) rowView.findViewById(R.id.date);
+		TextView textView2 = (TextView) rowView.findViewById(R.id.distance);
+		textView.setTextColor(getResources().getColor(R.color.light_grey));
+		textView2.setTextColor(getResources().getColor(R.color.light_grey));
+	}
+
+	private void highlightCurrentRow(View rowView) {
+		rowView.setBackgroundColor(getResources().getColor(
+				R.color.dark_grey));
+		TextView textView = (TextView) rowView.findViewById(R.id.date);
+		TextView textView2 = (TextView) rowView.findViewById(R.id.distance);
+		textView.setTextColor(getResources().getColor(R.color.yellow));
+		textView2.setTextColor(getResources().getColor(R.color.yellow));
+
+	}
+
 
 }

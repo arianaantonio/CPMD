@@ -16,5 +16,9 @@
     <string name="delete">Delete Run</string>
     <string name="signOut">Sign Out</string>
     <string name="updateRun">Update Run</string>
+    <color name="white">#FFFFFF</color>
+    <color name="yellow">#FFFF00</color>
+    <color name="light_grey">#ddd</color>
+    <color name="dark_grey">#aaa</color>
    
 </resources>

@@ -83,12 +83,12 @@ public class SignUpActivity extends Activity {
 
 		     public void onFinish() {
 		    	 networkConn = networkConnection.connectionStatus(context);
-		    	 if (networkConn) {
-		    		 Log.i("Main", "Connected");
-		    		 Toast.makeText(context, "Connected", Toast.LENGTH_SHORT).show();
+		    	 if (networkConn) { 
+		    		 //Log.i("Main", "Connected");
+		    		 //Toast.makeText(context, "Connected", Toast.LENGTH_SHORT).show();
 		    	 } else {
-		    		 Log.i("Main", "Not connected");
-		    		 Toast.makeText(context, "Not connected", Toast.LENGTH_SHORT).show();
+		    		 //Log.i("Main", "Not connected");
+		    		 //Toast.makeText(context, "Not connected", Toast.LENGTH_SHORT).show();
 		    	 }
 		    	 start();
 		     }

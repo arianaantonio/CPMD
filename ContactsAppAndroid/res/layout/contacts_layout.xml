@@ -57,7 +57,8 @@
         android:layout_alignBaseline="@+id/addButton"
         android:layout_alignBottom="@+id/addButton"
         android:layout_alignRight="@+id/editText2"
-        android:text="@string/updateRun" />
+        android:text="@string/updateRun"
+        android:textSize="14sp" />
 
     <Button
         android:id="@+id/signoutButton"
@@ -72,7 +73,6 @@
 
     <Button
         android:id="@+id/deleteButton"
-        style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

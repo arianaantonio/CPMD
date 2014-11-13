@@ -31,11 +31,12 @@ public class ParseStarterProjectActivity extends Activity {
 	String TAG = "Main Activity";
 	Boolean networkConn;
 	NetworkConnect networkConnection;
+	Context mContext;
 	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main); 
-		final Context mContext = this;
+		mContext = this;
 		
 		username = (EditText) findViewById(R.id.usernameText);
 		password = (EditText) findViewById(R.id.passwordText);
@@ -76,7 +77,7 @@ public class ParseStarterProjectActivity extends Activity {
 								Intent intent = new Intent(getBaseContext(), ContactsActivity.class);
 								startActivity(intent);
 							} else {
-								Log.e("Login", "ERROR: " +e.getCode());
+								Log.e("Login", "ERROR: " +e);
 							}
 						}
 					});
@@ -106,15 +107,20 @@ public class ParseStarterProjectActivity extends Activity {
 		     public void onFinish() {
 		    	 networkConn = networkConnection.connectionStatus(mContext);
 		    	 if (networkConn) {
-		    		 Log.i("Main", "Connected");
-		    		 Toast.makeText(mContext, "Connected", Toast.LENGTH_SHORT).show();
+		    		 //Log.i("Main", "Connected");
+		    		 //Toast.makeText(mContext, "Connected", Toast.LENGTH_SHORT).show();
 		    	 } else {
-		    		 Log.i("Main", "Not connected");
-		    		 Toast.makeText(mContext, "Not connected", Toast.LENGTH_SHORT).show();
+		    		 //Log.i("Main", "Not connected");
+		    		 //Toast.makeText(mContext, "Not connected", Toast.LENGTH_SHORT).show();
 		    	 }
 		    	 start();
 		     }
 		}.start();
 		
+		
+	}
+	@Override
+	public void onBackPressed() {
+		Toast.makeText(mContext, "Please log in or sign up", Toast.LENGTH_SHORT).show();
 	}
 }
