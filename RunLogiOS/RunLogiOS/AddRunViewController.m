@@ -77,46 +77,59 @@
     [numFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
     NSNumber *distanceNum = [numFormatter numberFromString:distance];
     
-    PFObject *newRun = [PFObject objectWithClassName:@"Runs"];
-    newRun[@"distance"] = distanceNum;
-    newRun[@"date"] = dateString;
-    newRun[@"userID"] = userId;
-    [newRun saveInBackground];
+    NSCharacterSet *stringsAllowed = [[NSCharacterSet characterSetWithCharactersInString:@".0123456789"]invertedSet];
     
-    [runArray addObject:newRun];
-    NSMutableDictionary *runDictionary2 = [[NSMutableDictionary alloc]init];
-    [runDictionary2 setValue:distanceNum forKey:@"distance"];
-    [runDictionary2 setValue:dateString forKey:@"date"];
-    [runArray removeAllObjects];
-    [_distanceField setText:@""];
-    PFQuery *query2 = [PFQuery queryWithClassName:@"Runs"];
-    [query2 whereKey:@"userID" equalTo:userId];
-    
-    [query2 findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+    if ([distance rangeOfCharacterFromSet:stringsAllowed].location != NSNotFound) {
         
-        if (!error) {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Error" message:@"Invalid character in distance field" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    } else if ([distance isEqualToString:@""]){
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Error" message:@"Please enter a distance" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    } else {
+        
+    
+        PFObject *newRun = [PFObject objectWithClassName:@"Runs"];
+        newRun[@"distance"] = distanceNum;
+        newRun[@"date"] = dateString;
+        newRun[@"userID"] = userId;
+        [newRun saveInBackground];
+        
+        [runArray addObject:newRun];
+        NSMutableDictionary *runDictionary2 = [[NSMutableDictionary alloc]init];
+        [runDictionary2 setValue:distanceNum forKey:@"distance"];
+        [runDictionary2 setValue:dateString forKey:@"date"];
+        [runArray removeAllObjects];
+        [_distanceField setText:@""];
+        PFQuery *query2 = [PFQuery queryWithClassName:@"Runs"];
+        [query2 whereKey:@"userID" equalTo:userId];
+        
+        [query2 findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             
-            NSString *datePulled = @"";
-            NSNumber *distancePulled = 0;
-            
-            for (PFObject *object in objects) {
-                NSLog(@"%@", object.objectId);
-                distancePulled = [object objectForKey:@"distance"];
-                datePulled = [object objectForKey:@"date"];
-                NSLog(@"Distance: %@ , Date: %@", distancePulled, datePulled);
-                NSMutableDictionary *runDictionary2 = [[NSMutableDictionary alloc]init];
+            if (!error) {
                 
-                [runDictionary2 setValue:distancePulled forKey:@"distance"];
-                [runDictionary2 setValue:datePulled forKey:@"date"];
-                [runDictionary2 setValue:object.objectId forKey:@"objectId"];
+                NSString *datePulled = @"";
+                NSNumber *distancePulled = 0;
                 
-                [runArray addObject:runDictionary2];
-                
+                for (PFObject *object in objects) {
+                    NSLog(@"%@", object.objectId);
+                    distancePulled = [object objectForKey:@"distance"];
+                    datePulled = [object objectForKey:@"date"];
+                    NSLog(@"Distance: %@ , Date: %@", distancePulled, datePulled);
+                    NSMutableDictionary *runDictionary2 = [[NSMutableDictionary alloc]init];
+                    
+                    [runDictionary2 setValue:distancePulled forKey:@"distance"];
+                    [runDictionary2 setValue:datePulled forKey:@"date"];
+                    [runDictionary2 setValue:object.objectId forKey:@"objectId"];
+                    
+                    [runArray addObject:runDictionary2];
+                    
+                }
+                [_runTable reloadData];
             }
-            [_runTable reloadData];
-        }
-    }];
-    [_runTable reloadData];
+        }];
+        [_runTable reloadData];
+    }
 
 
 }

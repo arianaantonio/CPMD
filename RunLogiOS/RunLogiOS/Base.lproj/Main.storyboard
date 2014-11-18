@@ -188,7 +188,7 @@
                                     <constraint firstAttribute="width" constant="97" id="c04-c6-Bsz"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                             </textField>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="kww-np-Dx6">
                                 <rect key="frame" x="0.0" y="278" width="600" height="162"/>
