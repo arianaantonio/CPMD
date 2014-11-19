@@ -7,11 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Reachability.h"
 
 @interface SignUpViewController : UIViewController
 {
     NSString *username;
     NSString *password;
+    Reachability *reachGoogle;
+    NetworkStatus checkNetworkStatus;
 }
 
 @property (nonatomic, strong) IBOutlet UITextField *usernameField;

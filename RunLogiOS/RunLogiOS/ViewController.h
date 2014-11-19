@@ -8,11 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h> 
+#import "Reachability.h"
 
-@interface ViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface ViewController : UIViewController
 {
     NSString *username;
     NSString *password;
+    Reachability *reachGoogle;
+    NetworkStatus checkNetworkStatus;
 }
 @property (nonatomic, strong) IBOutlet UITextField *usernameField;
 @property (nonatomic, strong) IBOutlet UITextField *passwordField;

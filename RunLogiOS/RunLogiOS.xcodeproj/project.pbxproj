@@ -29,6 +29,7 @@
 		416A3C751A07135F00722DD0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 416A3C741A07135F00722DD0 /* SystemConfiguration.framework */; };
 		416A3C781A0715BC00722DD0 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 416A3C771A0715BC00722DD0 /* SignUpViewController.m */; };
 		416A3C7B1A0715DA00722DD0 /* AddRunViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 416A3C7A1A0715DA00722DD0 /* AddRunViewController.m */; };
+		416A3C7E1A1B221400722DD0 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 416A3C7D1A1B221400722DD0 /* Reachability.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,8 @@
 		416A3C771A0715BC00722DD0 /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
 		416A3C791A0715DA00722DD0 /* AddRunViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddRunViewController.h; sourceTree = "<group>"; };
 		416A3C7A1A0715DA00722DD0 /* AddRunViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddRunViewController.m; sourceTree = "<group>"; };
+		416A3C7C1A1B221400722DD0 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		416A3C7D1A1B221400722DD0 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +139,8 @@
 				416A3C771A0715BC00722DD0 /* SignUpViewController.m */,
 				416A3C791A0715DA00722DD0 /* AddRunViewController.h */,
 				416A3C7A1A0715DA00722DD0 /* AddRunViewController.m */,
+				416A3C7C1A1B221400722DD0 /* Reachability.h */,
+				416A3C7D1A1B221400722DD0 /* Reachability.m */,
 				416A3C421A07092200722DD0 /* Images.xcassets */,
 				416A3C441A07092200722DD0 /* LaunchScreen.xib */,
 				416A3C351A07092200722DD0 /* Supporting Files */,
@@ -294,6 +299,7 @@
 				416A3C3E1A07092200722DD0 /* ViewController.m in Sources */,
 				416A3C3B1A07092200722DD0 /* AppDelegate.m in Sources */,
 				416A3C781A0715BC00722DD0 /* SignUpViewController.m in Sources */,
+				416A3C7E1A1B221400722DD0 /* Reachability.m in Sources */,
 				416A3C381A07092200722DD0 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

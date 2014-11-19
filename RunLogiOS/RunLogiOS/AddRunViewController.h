@@ -7,12 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Reachability.h"
 
 @interface AddRunViewController : UIViewController
 {
     NSMutableArray *runArray;
     NSMutableDictionary *runDictionary;
     NSString *userId;
+    Reachability *reachGoogle;
+    NetworkStatus checkNetworkStatus;
 }
 @property (nonatomic, strong) IBOutlet UITextField *distanceField;
 @property (nonatomic, strong) IBOutlet UIDatePicker *runDate;
@@ -23,5 +26,6 @@
 -(IBAction)addRun:(id)sender;
 -(IBAction)deleteRun:(id)sender;
 -(IBAction)signOut:(id)sender;
+-(IBAction)refresh:(id)sender;
 
 @end
